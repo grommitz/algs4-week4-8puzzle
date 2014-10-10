@@ -12,29 +12,32 @@ public class BoardTest {
 
 	@Test
 	public void createBoard() {
-		Board b = from("1 2 3 / 5 7 8 / 0 6 4");
+		Board b = board("1 2 3 / 5 7 8 / 0 6 4");
 		System.out.println(b.toString());
 	}
 
 	@Test
 	public void testIsGoal() {
-		Board b = from("1 2 3 / 5 7 8 / 0 6 4");
-		assertThat(b.isGoal(), is(false));
-		Board c = from("1 2 3 / 4 5 6 / 7 8 0");
-		assertThat(c.isGoal(), is(true));
+		assertThat(board("1 2 3 / 5 7 8 / 0 6 4").isGoal(), is(false));
+		assertThat(board("1 2 3 / 4 5 6 / 7 8 0").isGoal(), is(true));
 	}
 
 	@Test
 	public void testHamming() {
-		Board b = from("1 2 3 / 5 4 6 / 7 8 0");
-		assertThat(b.hamming(), is(2));
-		Board c = from("1 2 3 / 4 5 6 / 7 8 0");
-		assertThat(c.hamming(), is(0));
-		Board d = from("3 1 2 / 6 0 5 / 4 7 8");
-		assertThat(d.hamming(), is(8));
+		assertThat(board("1 2 3 / 5 4 6 / 7 8 0").hamming(), is(2));
+		assertThat(board("1 2 3 / 4 5 6 / 7 8 0").hamming(), is(0));
+		assertThat(board("3 1 2 / 6 0 5 / 4 7 8").hamming(), is(8));
 	}
 
-	private Board from(String str) {
+	@Test
+	public void testManhattan() {
+		assertThat(board("0 1 3 / 4 2 5 / 7 8 6").manhattan(), is(4));
+		assertThat(board("4 1 3 / 0 2 5 / 7 8 6").manhattan(), is(5));
+		assertThat(board("1 0 3 / 4 2 5 / 7 8 6").manhattan(), is(3));
+		assertThat(board("1 2 3 / 4 5 6 / 7 8 0").manhattan(), is(0));
+	}
+	
+	private Board board(String str) {
 		int[][] blocks = getBlocks(str);
 		return new Board(blocks);
 	}

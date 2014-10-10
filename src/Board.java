@@ -1,3 +1,5 @@
+import javax.management.RuntimeErrorException;
+
 
 public class Board {
 
@@ -31,9 +33,37 @@ public class Board {
 		return outOfPlace;
 	}
 	
+	private class Point {
+		final int i, j;
+		Point(int pos) {
+			this.i = pos / N;
+			this.j = pos % N;
+		}
+		Point(int i, int j) {
+			this.i = i; this.j = j;
+		}
+		int dist(Point other) {
+			return Math.abs(i - other.i) + Math.abs(j - other.j);
+		}
+	}
+	
 	// sum of Manhattan distances between blocks and goal
 	public int manhattan() {
-		return -1;
+		int dist = 0;
+		for (int i = 0; i < N * N - 1; ++i) {
+			if (at(i) != i + 1) {
+				Point p = find(i + 1);
+				dist += new Point(i).dist(p);
+			}
+		}
+		return dist;
+	}
+	
+	private Point find(int value) {
+		for (int i = 0; i < N * N; ++i) {
+			if (at(i) == value) return new Point(i);
+		}
+		throw new RuntimeException(value + " is not on the board");
 	}
 	
 	// is this board the goal board?
