@@ -2,12 +2,17 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 import org.junit.Test;
 
-
+/**
+ * 
+ * @author Martin Charlesworth
+ *
+ */
 public class BoardTest {
 
 	@Test
@@ -30,11 +35,43 @@ public class BoardTest {
 	}
 
 	@Test
+	public void testEquals() {
+		assertThat(board("0 1 3 / 4 2 5 / 7 8 6").equals(board("1 0 3 / 4 2 5 / 7 8 6")), is(false));
+		assertThat(board("0 1 3 / 4 2 5 / 7 8 6").equals(board("0 1 3 / 4 2 5 / 7 8 6")), is(true));		
+	}
+	
+	@Test
 	public void testManhattan() {
 		assertThat(board("0 1 3 / 4 2 5 / 7 8 6").manhattan(), is(4));
 		assertThat(board("4 1 3 / 0 2 5 / 7 8 6").manhattan(), is(5));
 		assertThat(board("1 0 3 / 4 2 5 / 7 8 6").manhattan(), is(3));
 		assertThat(board("1 2 3 / 4 5 6 / 7 8 0").manhattan(), is(0));
+	}
+	
+	@Test
+	public void testNeighbors() {
+		Board initial = board("0 1 3 / 4 2 5 / 7 8 6");
+		Board neighbour1 = board("1 0 3 / 4 2 5 / 7 8 6");
+		Board neighbour2 = board("4 1 3 / 0 2 5 / 7 8 6");
+
+		Iterable<Board> neighbours = initial.neighbors();
+		assertThat(count(neighbours), is(2));
+		
+		Iterator<Board> it = neighbours.iterator();
+		while (it.hasNext()) {
+			Board neighbour = it.next();
+			assertThat(neighbour.equals(neighbour1) || neighbour.equals(neighbour2), is(true));
+		}
+	}
+	
+	private <T> int count(Iterable<T> iterable) {
+		int n = 0;
+		Iterator<T> i = iterable.iterator();
+		while (i.hasNext()) {
+			++n;
+			i.next();
+		}
+		return n;
 	}
 	
 	private Board board(String str) {
