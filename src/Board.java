@@ -23,7 +23,12 @@ public class Board {
 	
 	// number of blocks out of place
 	public int hamming() {
-		return -1;
+		int outOfPlace = 0;
+		for (int i = 0; i < N * N - 1; ++i) {
+			if (at(i) != i + 1) 
+				++outOfPlace;
+		}
+		return outOfPlace;
 	}
 	
 	// sum of Manhattan distances between blocks and goal
@@ -33,11 +38,7 @@ public class Board {
 	
 	// is this board the goal board?
 	public boolean isGoal() {
-		for (int i = 0; i < N * N - 2; ++i) {
-			if (at(i) != i + 1) 
-				return false;
-		}
-		return true;
+		return hamming() == 0;
 	}
 	
 	private int at(int i) {

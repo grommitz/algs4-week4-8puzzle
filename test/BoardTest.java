@@ -12,8 +12,7 @@ public class BoardTest {
 
 	@Test
 	public void createBoard() {
-		int[][] blocks = getBlocks("1 2 3 / 5 7 8 / 0 6 4");
-		Board b = new Board(blocks);
+		Board b = from("1 2 3 / 5 7 8 / 0 6 4");
 		System.out.println(b.toString());
 	}
 
@@ -23,6 +22,16 @@ public class BoardTest {
 		assertThat(b.isGoal(), is(false));
 		Board c = from("1 2 3 / 4 5 6 / 7 8 0");
 		assertThat(c.isGoal(), is(true));
+	}
+
+	@Test
+	public void testHamming() {
+		Board b = from("1 2 3 / 5 4 6 / 7 8 0");
+		assertThat(b.hamming(), is(2));
+		Board c = from("1 2 3 / 4 5 6 / 7 8 0");
+		assertThat(c.hamming(), is(0));
+		Board d = from("3 1 2 / 6 0 5 / 4 7 8");
+		assertThat(d.hamming(), is(8));
 	}
 
 	private Board from(String str) {
