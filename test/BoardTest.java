@@ -1,10 +1,7 @@
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
 
 import org.junit.Test;
 
@@ -13,7 +10,7 @@ import org.junit.Test;
  * @author Martin Charlesworth
  *
  */
-public class BoardTest {
+public class BoardTest extends TestCommon {
 
 	@Test
 	public void createBoard() {
@@ -32,6 +29,7 @@ public class BoardTest {
 		assertThat(board("1 2 3 / 5 4 6 / 7 8 0").hamming(), is(2));
 		assertThat(board("1 2 3 / 4 5 6 / 7 8 0").hamming(), is(0));
 		assertThat(board("3 1 2 / 6 0 5 / 4 7 8").hamming(), is(8));
+		assertThat(board("8 1 3 / 4 0 2 / 7 6 5").hamming(), is(5));
 	}
 
 	@Test
@@ -46,6 +44,7 @@ public class BoardTest {
 		assertThat(board("4 1 3 / 0 2 5 / 7 8 6").manhattan(), is(5));
 		assertThat(board("1 0 3 / 4 2 5 / 7 8 6").manhattan(), is(3));
 		assertThat(board("1 2 3 / 4 5 6 / 7 8 0").manhattan(), is(0));
+		assertThat(board("8 1 3 / 4 0 2 / 7 6 5").manhattan(), is(10));
 	}
 	
 	@Test
@@ -80,38 +79,6 @@ public class BoardTest {
 		return n;
 	}
 	
-	private Board board(String str) {
-		int[][] blocks = getBlocks(str);
-		return new Board(blocks);
-	}
-	
-	private int[][] getBlocks(String str) {
-		Scanner s = new Scanner(str);
-		List<Integer> row = new ArrayList<>();
-		int[][] blocks = null;
-		int rowCount = 0;
-		while (s.hasNext()) {
-			String tok = s.next();
-			if (tok.equals("/")) {
-				if (blocks == null) {
-					blocks = new int[row.size()][row.size()];
-				}
-				for (int j = 0; j < row.size(); ++j) {
-					blocks[rowCount][j] = row.get(j);
-				}
-				rowCount++;
-				row.clear();
-			} else {
-				row.add(Integer.parseInt(tok));
-			}
-		}
-		if (!row.isEmpty()) {
-			for (int j = 0; j < row.size(); ++j) {
-				blocks[rowCount][j] = row.get(j);
-			}
-		}
-		s.close();
-		return blocks;
-	}
+
 	
 }

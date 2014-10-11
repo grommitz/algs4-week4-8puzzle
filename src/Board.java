@@ -150,17 +150,6 @@ public class Board {
 		}
 	}
 	
-	private class Node {
-		final Board board;
-		final Board prev;
-		final int moves;
-		public Node(Board board, Board prev, int moves) {
-			this.board = board;
-			this.prev = prev;
-			this.moves = moves;
-		}
-		
-	}
-	
+
 
 }
