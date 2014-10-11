@@ -64,6 +64,12 @@ public class BoardTest {
 		}
 	}
 	
+	@Test
+	public void testTwin() {
+		assertThat(board("0 1 3 / 4 2 5 / 7 8 6").twin(), is(board("0 1 3 / 2 4 5 / 7 8 6")));
+		assertThat(board("6 1 3 / 4 2 5 / 7 8 0").twin(), is(board("1 6 3 / 4 2 5 / 7 8 0")));
+	}
+	
 	private <T> int count(Iterable<T> iterable) {
 		int n = 0;
 		Iterator<T> i = iterable.iterator();

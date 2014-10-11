@@ -75,7 +75,9 @@ public class Board {
 	
 	// a boadr that is obtained by exchanging two adjacent blocks in the same row
 	public Board twin() {
-		return null;
+		Point blank = find(0);
+		int row = blank.i == 0 ? 1 : 0;
+		return swap(new Point(row, 0), new Point(row, 1));
 	}
 	
 	// does this board equal y?
