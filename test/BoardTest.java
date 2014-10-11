@@ -69,6 +69,15 @@ public class BoardTest extends TestCommon {
 		assertThat(board("6 1 3 / 4 2 5 / 7 8 0").twin(), is(board("1 6 3 / 4 2 5 / 7 8 0")));
 	}
 	
+	@Test
+	public void testToString() {
+        assertThat(board("2 0 3 4 / 1 10 6 8 / 5 9 7 12 / 13 14 11 15").toString(), is("4\n"
+        		+ " 2  0  3  4\n"
+        		+ " 1 10  6  8\n"
+        		+ " 5  9  7 12\n"
+        		+ "13 14 11 15"));
+	}
+	
 	private <T> int count(Iterable<T> iterable) {
 		int n = 0;
 		Iterator<T> i = iterable.iterator();

@@ -137,13 +137,14 @@ public class Board {
 	}
 
 	private class Point {
-		final int i, j;
+		private final int i, j;
 		Point(int pos) {
 			this.i = pos / N;
 			this.j = pos % N;
 		}
 		Point(int i, int j) {
-			this.i = i; this.j = j;
+			this.i = i; 
+			this.j = j;
 		}
 		int dist(Point other) {
 			return Math.abs(i - other.i) + Math.abs(j - other.j);

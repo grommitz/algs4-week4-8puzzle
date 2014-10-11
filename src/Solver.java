@@ -12,14 +12,14 @@ public class Solver {
 
 	private List<Board> solution = new ArrayList<>();
 	
-	Comparator<Node> hammingComparator = new Comparator<Solver.Node>() {
+	private Comparator<Node> hammingComparator = new Comparator<Solver.Node>() {
 		@Override
 		public int compare(Node o1, Node o2) {
 			return o1.board.hamming() - o2.board.hamming();
 		}
 	};
 
-	Comparator<Node> manhattanComparator = new Comparator<Solver.Node>() {
+	private Comparator<Node> manhattanComparator = new Comparator<Solver.Node>() {
 		@Override
 		public int compare(Node o1, Node o2) {
 			return o1.board.manhattan() - o2.board.manhattan();
@@ -36,15 +36,14 @@ public class Solver {
 		pq.insert(new Node(initial, null, 0));
 		while (!pq.isEmpty()) {
 			Node curr = pq.delMin();
-			//System.out.println("current node: \n" + curr.board);
 			if (solution.contains(curr.board)) {
-				System.out.println("cycle detected - not solveable!");
+				//System.out.println("cycle detected - not solveable!");
 				solution = null;
 				break;
 			}
 			solution.add(curr.board);
 			if (curr.board.isGoal()) {
-				System.out.println("solved!");
+				//System.out.println("solved!");
 				break;
 			}
 			for (Board n : curr.board.neighbors()) {
@@ -94,9 +93,9 @@ public class Solver {
 	}
 	
 	private class Node {
-		final Board board;
-		final Board prev;
-		final int moves;
+		private final Board board;
+		private final Board prev;
+		private final int moves;
 		public Node(Board board, Board prev, int moves) {
 			this.board = board;
 			this.prev = prev;
