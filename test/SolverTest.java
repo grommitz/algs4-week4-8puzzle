@@ -33,6 +33,27 @@ public class SolverTest extends TestCommon {
 		assertThat(move(s.solution(), 4), is(board("1 2 3 / 4 5 6 / 7 8 0")));
 		
 	}
+
+	@Test
+	public void puzzle07() {
+		Solver s = new Solver(from("http://coursera.cs.princeton.edu/algs4/testing/8puzzle/puzzle07.txt"));
+		assertThat(s.moves(), is(7));
+		print(s.solution());
+	}
+	
+	@Test
+	public void puzzle08() {
+		Solver s = new Solver(from("http://coursera.cs.princeton.edu/algs4/testing/8puzzle/puzzle08.txt"));
+		assertThat(s.moves(), is(8));
+		print(s.solution());
+	}
+	
+	@Test
+	public void puzzle12() {
+		Solver s = new Solver(from("http://coursera.cs.princeton.edu/algs4/testing/8puzzle/puzzle12.txt"));
+		assertThat(s.moves(), is(12));
+		print(s.solution());
+	}
 	
 	private Board move(Iterable<Board> solution, int n) {
 		Iterator<Board> it = solution.iterator();
