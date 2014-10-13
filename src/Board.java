@@ -82,10 +82,13 @@ public class Board {
 	
 	// does this board equal y?
 	public boolean equals(Object y) {
-		if (y == null || y.getClass() != Board.class) {
+		if (y == null || !(y instanceof Board)) {
 			return false;
 		}
 		Board that = (Board) y;
+		if (this.N != that.N) {
+			return false;
+		}
 		for (int i = 0; i < N; ++i) {
 			for (int j = 0; j < N; ++j) {
 				if (this.board[i][j] != that.board[i][j]) return false;
