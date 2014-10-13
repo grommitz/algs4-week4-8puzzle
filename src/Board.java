@@ -122,10 +122,21 @@ public class Board {
 	
 	// string representation of this board (in the output format specified below)
 	public String toString() {
+		int w = 2;
+		for (int p = 2; p < 6; p++) {
+			if (N * N - 1 < Math.pow(10, p)) {
+				w = p;
+				break;
+			}
+		}
+		String fmt = "%" + w + "d";
+		
 		StringBuilder sb = new StringBuilder();
+		sb.append(N + "\n");
 		for (int i = 0; i < N; ++i) {
 			for (int j = 0; j < N; ++j) {
-				sb.append(board[i][j] + " ");
+				sb.append(String.format(fmt, board[i][j]));
+				if (j + 1 < N) sb.append(" ");
 			}
 			sb.append("\n");
 		}

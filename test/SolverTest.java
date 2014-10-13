@@ -53,10 +53,6 @@ public class SolverTest extends TestCommon {
 		}
 	}
 
-	private Solver solve(String s) {
-		return new Solver(board(s));
-	}
-
 	private boolean solvable(String s) {
 		return solvable(board(s));
 	}

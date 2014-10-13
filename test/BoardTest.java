@@ -62,7 +62,7 @@ public class BoardTest extends TestCommon {
 			assertThat(neighbour.equals(neighbour1) || neighbour.equals(neighbour2), is(true));
 		}
 	}
-	
+
 	@Test
 	public void testTwin() {
 		assertThat(board("0 1 3 / 4 2 5 / 7 8 6").twin(), is(board("0 1 3 / 2 4 5 / 7 8 6")));
@@ -75,7 +75,7 @@ public class BoardTest extends TestCommon {
         		+ " 2  0  3  4\n"
         		+ " 1 10  6  8\n"
         		+ " 5  9  7 12\n"
-        		+ "13 14 11 15"));
+        		+ "13 14 11 15\n"));
 	}
 	
 	private <T> int count(Iterable<T> iterable) {
